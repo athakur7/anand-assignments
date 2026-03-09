@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms and Validation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>Registration Form</h1>
+    <form action="#" method="post">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required minlength="3">
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required minlength="6" maxlength="12">
+
+        <label for="course">Course</label>
+        <select id="course" name="course">
+            <option>HTML</option>
+            <option>CSS</option>
+            <option>JavaScript</option>
+        </select>
+
+        <label for="comments">Comments</label>
+        <textarea id="comments" name="comments" rows="4"></textarea>
+
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+    </form>
+</body>
+
+</html>

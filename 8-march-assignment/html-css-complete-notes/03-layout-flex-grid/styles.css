@@ -1,0 +1,47 @@
+body {
+    font-family: "Gill Sans", "Segoe UI", sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: #eef6ff;
+}
+
+h1,
+h2 {
+    text-align: center;
+}
+
+.flex-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.tile {
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #2563eb;
+    color: #ffffff;
+    border-radius: 10px;
+}
+
+.grid-board {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(90px, 1fr));
+    gap: 12px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.card {
+    background: #16a34a;
+    color: #ffffff;
+    height: 90px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+}

@@ -1,0 +1,81 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Cambria", serif;
+    color: #111827;
+    background: linear-gradient(180deg, #fff7ed, #ffedd5);
+}
+
+.site-header {
+    background: #9a3412;
+    color: #ffffff;
+    padding: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+nav a {
+    color: #ffffff;
+    margin-right: 12px;
+    text-decoration: none;
+}
+
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 16px;
+}
+
+.panel {
+    background: #ffffff;
+    border: 1px solid #fed7aa;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 14px;
+}
+
+.skill-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.skill-grid div {
+    background: #fb923c;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+form {
+    display: grid;
+    gap: 10px;
+}
+
+input,
+textarea,
+button {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    font: inherit;
+}
+
+button {
+    background: #ea580c;
+    color: #ffffff;
+    border: none;
+}
+
+@media (max-width: 640px) {
+    .skill-grid {
+        grid-template-columns: 1fr;
+    }
+}
