@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="feedback" onclick="goodbye()" style="background-color: aqua;
+    color:red;width:90%;height:200px;">
+
+    </div>
+    <hr>
+    
+    <p>Say what? <input id="sayThis" size=40>
+    <p>How many times? <select id='howMany'>
+        <option value=1>1</option>
+        <option value=5 selected>5</option>
+        <option value=10>10</option>
+        <option value=20>20</option>
+    </select>
+    <p><button onClick='doLoop()'>Do It!</button>
+    <p><div id="results"></div>
+    
+    <script language="Javascript">
+
+        document.getElementById('feedback').innerHTML = "hello world";
+        function goodbye() {
+            document.getElementById('feedback').innerHTML = "Good bye";
+        }
+
+        function doLoop() {
+            var text = document.getElementById('sayThis').value;
+            var times = document.getElementById('howMany').value;
+            var output = "";
+            
+            for (var i = 0; i < times; i++) {
+                output += text + "<br>";
+            }
+            
+            document.getElementById('results').innerHTML = output;
+        }
+
+    </script>
+</body>
+
+</html>
