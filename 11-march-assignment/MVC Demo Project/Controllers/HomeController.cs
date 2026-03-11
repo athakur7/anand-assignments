@@ -21,6 +21,17 @@ namespace MVC_Demo_Project.Controllers
         {
             return "This is a sample demo method 2";
         }
+        public IActionResult sampleDemo3()
+        {
+            int age = 27;
+            string name = "Anand";
+            ViewBag.Age = age;
+            ViewBag.Name = name;
+            ViewData["Message"] = "This is a sample demo method 3";
+            ViewData["Year"] = DateTime.Now.Year;
+            return View();
+
+        }
         public IActionResult Index()
         {
             return View();
