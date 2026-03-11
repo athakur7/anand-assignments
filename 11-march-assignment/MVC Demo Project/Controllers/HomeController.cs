@@ -50,6 +50,10 @@ namespace MVC_Demo_Project.Controllers
         {
             return View(employeesList);
         }
+        public IActionResult display()
+        {
+            return View();
+        }
         public IActionResult singleObjectPassing()
         {
             return View(obj);
