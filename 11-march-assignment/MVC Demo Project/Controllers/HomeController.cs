@@ -32,6 +32,29 @@ namespace MVC_Demo_Project.Controllers
             return View();
 
         }
+        Employee obj = new Employee()
+        {
+            EmployeeId = 101,
+            EmpName = "Anand",
+            Salary = 45000
+        };
+        List<Employee> employeesList = new List<Employee>()
+        {
+            new Employee(){EmployeeId=101,EmpName="Anand",Salary=45000, ImageUrl= "/images/Library-HackerRank-03-02-2026_12_39_PM.png"},
+            new Employee(){EmployeeId=102,EmpName="Sita",Salary=55000, ImageUrl= "/images/Programming-problems-and-Competitions-HackerRank-03-02-2026_12_40_PM.png"},
+            new Employee(){EmployeeId=103,EmpName="Gita",Salary=65000, ImageUrl= "/images/Programming-problems-and-Competitions-HackerRank-03-02-2026_12_40_PM.png"},
+            new Employee(){EmployeeId=104,EmpName="Rita",Salary=75000, ImageUrl= "/images/Programming-problems-and-Competitions-HackerRank-03-02-2026_12_40_PM.png"},
+        };
+
+        public IActionResult listObjectPassing()
+        {
+            return View(employeesList);
+        }
+        public IActionResult singleObjectPassing()
+        {
+            return View(obj);
+        }
+
         public IActionResult Index()
         {
             return View();
