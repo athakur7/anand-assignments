@@ -1,109 +1,133 @@
-﻿
 @{
-    ViewData["Title"] = "display";
+    ViewData["Title"] = "Display Page";
 }
 
-<h1>display</h1>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+    .display-container {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 20px;
+    }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Template 15</title>
-    <meta name="description" content="A description of your website">
-    <meta name="keywords" content="keyword1, keyword2, keyword3">
-    <link href="/css/style.css" rel="stylesheet" type="text/css">
-</head>
-<body>
+    .display-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
 
-    <div id="wrapper">
+    .display-header h1 {
+        color: #333;
+        margin-bottom: 10px;
+    }
 
-        <div id="header">
-            <h1>Enter Site Title</h1>
-            <p>Enter Site Slogan</p>
-        </div>
+    .display-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
 
-        <div id="page_content">
+    .card {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s ease;
+    }
 
-            <div class="navigation">
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">New Page 1</a></li>
-                    <li><a href="#">New Page 2</a></li>
-                    <li><a href="#">New Page 3</a></li>
-                    <li><a href="#">New Page 4</a></li>
-                </ul>
-            </div>
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
 
-            <div class="left_section">
-                <div class="common_content">
-                    <h2>About</h2>
-                    <hr>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet.</p>
-                    <br>
-                </div>
+    .card-icon {
+        font-size: 40px;
+        margin-bottom: 15px;
+    }
 
-                <div class="top_content border_none">
-                    <div class="column_one">
-                        <h2>Introductions</h2>
-                        <p>Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ant</p>
-                        <br>
-                        <p><a href="#" class="btn">More</a></p>
-                    </div>
-                    <div class="column_two border_left">
-                        <h2>Welcome</h2>
-                        <p>Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ant</p>
-                        <br>
-                        <p><a href="#" class="btn">More</a></p>
-                    </div>
-                </div>
-            </div>
+    .card h3 {
+        color: #333;
+        margin-bottom: 10px;
+    }
 
-            <div class="right_side_bar">
+    .card p {
+        color: #666;
+        font-size: 14px;
+    }
 
-                <div class="col_1">
-                    <h1>Main Menu</h1>
-                    <div class="box">
-                        <ul>
-                            <li><a href="#">Menu Item 1</a></li>
-                            <li><a href="#">Menu Item 2</a></li>
-                            <li><a href="#">Menu Item 3</a></li>
-                            <li><a href="#">Menu Item 4</a></li>
-                            <li><a href="#">Menu Item 5</a></li>
-                            <li><a href="#">Menu Item 6</a></li>
-                            <li><a href="#">Menu Item 7</a></li>
-                            <li><a href="#">Menu Item 8</a></li>
-                            <li><a href="#">Menu Item 9</a></li>
-                        </ul>
-                    </div>
-                </div>
+    .card-link {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 8px 16px;
+        background-color: #4a90d9;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+    }
 
-                <div class="col_1">
-                    <h1>Resources</h1>
-                    <div class="box">
-                        <p>Enter Block content here...</p>
-                        <br>
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo</p>
-                    </div>
-                </div>
+    .card-link:hover {
+        background-color: #357abd;
+    }
 
-            </div>
+    .btn-primary {
+        background-color: #4a90d9;
+    }
 
-            <div class="clear"></div>
+    .btn-success {
+        background-color: #27ae60;
+    }
 
-            <!--start footer from here-->
-            <div id="footer">
-                Copyright &copy; 2014. Design by <a href="http://www.htmltemplates.net" target="_blank">HTML Templates</a><br>
+    .btn-info {
+        background-color: #3498db;
+    }
 
-                <!--DO NOT remove footer link-->
-                <!--Template designed by--><a href="http://www.htmltemplates.net"><img src="images/footer.gif" class="copyright" alt="http://www.htmltemplates.net"></a>
-            </div>
+    .btn-warning {
+        background-color: #f39c12;
+    }
+</style>
 
-            <!--/. end footer from here-->
-        </div>
-
+<div class="display-container">
+    <div class="display-header">
+        <h1><i class="fas fa-display"></i> Company Management System</h1>
+        <p>Navigate through employees and departments</p>
     </div>
 
-</body>
-</html>
+    <div class="display-cards">
+        <div class="card">
+            <div class="card-icon" style="color: #4a90d9;">
+                <i class="fas fa-users"></i>
+            </div>
+            <h3>Employees</h3>
+            <p>View and manage company employees</p>
+            <a href="@Url.Action("ListEmployees", "Home")" class="card-link btn-primary">View Employees</a>
+        </div>
+
+        <div class="card">
+            <div class="card-icon" style="color: #27ae60;">
+                <i class="fas fa-building"></i>
+            </div>
+            <h3>Departments</h3>
+            <p>Explore different departments</p>
+            <a href="@Url.Action("ListDepartments", "Home")" class="card-link btn-success">View Departments</a>
+        </div>
+
+        <div class="card">
+            <div class="card-icon" style="color: #3498db;">
+                <i class="fas fa-search"></i>
+            </div>
+            <h3>Search Employee</h3>
+            <p>Find employees by ID</p>
+            <a href="@Url.Action("SearchEmployee", "Home")" class="card-link btn-info">Search Now</a>
+        </div>
+
+        <div class="card">
+            <div class="card-icon" style="color: #f39c12;">
+                <i class="fas fa-filter"></i>
+            </div>
+            <h3>Search Department</h3>
+            <p>Find departments by ID</p>
+            <a href="@Url.Action("SearchDepartment", "Home")" class="card-link btn-warning">Search Now</a>
+        </div>
+    </div>
+</div>

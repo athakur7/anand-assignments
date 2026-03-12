@@ -7,5 +7,11 @@
         public int Salary { get; set; }
         public string? ImageUrl { get; set; }
         public string? Description { get; set; }
+
+        // Foreign Key
+        public int DepartmentId { get; set; }
+
+        // Navigation Property
+        public Department? Department { get; set; }
     }
 }
