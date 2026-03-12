@@ -1,0 +1,131 @@
+﻿@model MVC_Demo_Project.Models.Employee
+@{
+    ViewData["Title"] = "Employee Details";
+}
+
+<style>
+    .details-container {
+        max-width: 500px;
+        margin: 40px auto;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+    }
+
+    .details-header {
+        background-color: #4a90d9;
+        color: white;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .details-header img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid white;
+        margin-bottom: 10px;
+    }
+
+    .details-header h2 {
+        margin: 0;
+        font-size: 1.5rem;
+    }
+
+    .details-body {
+        padding: 24px;
+        background-color: #f9f9f9;
+    }
+
+    .detail-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid #e0e0e0;
+        font-size: 1rem;
+    }
+
+    .detail-row:last-child {
+        border-bottom: none;
+    }
+
+    .detail-label {
+        font-weight: bold;
+        color: #555;
+    }
+
+    .detail-value {
+        color: #222;
+    }
+
+    .description-box {
+        margin: 0 24px 20px;
+        padding: 14px 16px;
+        background-color: #eef4fb;
+        border-left: 4px solid #4a90d9;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        color: #444;
+        line-height: 1.6;
+    }
+
+    .description-box h5 {
+        margin: 0 0 6px;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #4a90d9;
+    }
+
+    .back-btn {
+        display: block;
+        text-align: center;
+        margin: 4px 24px 24px;
+        padding: 10px;
+        background-color: #4a90d9;
+        color: white;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .back-btn:hover {
+        background-color: #357abd;
+        color: white;
+    }
+</style>
+
+<div class="details-container">
+    <div class="details-header">
+        <img src="@Model.ImageUrl" alt="@Model.EmpName" />
+        <h2>@Model.EmpName</h2>
+    </div>
+
+    <div class="details-body">
+        <div class="detail-row">
+            <span class="detail-label">Employee ID</span>
+            <span class="detail-value">@Model.EmployeeId</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Name</span>
+            <span class="detail-value">@Model.EmpName</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Salary</span>
+            <span class="detail-value">₹@Model.Salary.ToString("N0")</span>
+        </div>
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.Description))
+    {
+        <div class="description-box">
+            <h5>About</h5>
+            @Model.Description
+        </div>
+    }
+
+    <a class="back-btn" asp-action="listObjectPassing">← Back to List</a>
+</div>

@@ -1,0 +1,159 @@
+@model MVC_Demo_Project.Models.Employee
+@{
+    ViewData["Title"] = "Search Employee";
+}
+
+<style>
+    .search-wrapper {
+        max-width: 480px;
+        margin: 40px auto;
+        font-family: Arial, sans-serif;
+    }
+
+    .search-form {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 24px;
+    }
+
+    .search-form input {
+        flex: 1;
+        padding: 10px 14px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 1rem;
+    }
+
+    .search-form button {
+        padding: 10px 20px;
+        background-color: #4a90d9;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    .search-form button:hover {
+        background-color: #357abd;
+    }
+
+    .result-card {
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .result-header {
+        background-color: #4a90d9;
+        color: white;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .result-header img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 3px solid white;
+        margin-bottom: 10px;
+    }
+
+    .result-body {
+        padding: 20px;
+        background-color: #f9f9f9;
+    }
+
+    .detail-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .detail-row:last-child {
+        border-bottom: none;
+    }
+
+    .detail-label {
+        font-weight: bold;
+        color: #555;
+    }
+
+    .description-row {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 10px 0;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .description-row:last-child {
+        border-bottom: none;
+    }
+
+    .description-row .detail-label {
+        font-weight: bold;
+        color: #555;
+    }
+
+    .description-row span:last-child {
+        color: #444;
+        line-height: 1.6;
+        font-size: 0.95rem;
+    }
+
+    .not-found {
+        text-align: center;
+        color: #c0392b;
+        font-size: 1rem;
+        padding: 20px;
+        background-color: #fdecea;
+        border-radius: 8px;
+    }
+</style>
+
+<div class="search-wrapper">
+    <h2>Search Employee</h2>
+
+    <form method="get" asp-action="SearchEmp" class="search-form">
+        <input type="number" name="empId" placeholder="Enter Employee ID" required />
+        <button type="submit">Search</button>
+    </form>
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="not-found">@ViewBag.Message</div>
+    }
+    else if (Model != null && Model.EmployeeId != 0)
+    {
+        <div class="result-card">
+            <div class="result-header">
+                <img src="@Model.ImageUrl" alt="@Model.EmpName" />
+                <h3>@Model.EmpName</h3>
+            </div>
+            <div class="result-body">
+                <div class="detail-row">
+                    <span class="detail-label">Employee ID</span>
+                    <span>@Model.EmployeeId</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Name</span>
+                    <span>@Model.EmpName</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Salary</span>
+                    <span>₹@Model.Salary.ToString("N0")</span>
+                </div>
+                @if (!string.IsNullOrEmpty(Model.Description))
+                {
+                    <div class="description-row">
+                        <span class="detail-label">About</span>
+                        <span>@Model.Description</span>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
