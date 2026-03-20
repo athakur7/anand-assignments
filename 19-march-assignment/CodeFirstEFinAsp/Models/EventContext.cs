@@ -16,6 +16,9 @@ namespace CodeFirstEFinAsp.Models
         public DbSet<Author1> authors1 { set; get; }
         public DbSet<Employee> employees { set; get; }
         public DbSet<UserDetail> userDetails { set; get; }
+        public DbSet<Customer> customer { set; get; }
+        public DbSet<Product> products { set; get; }
+
 
     }
 }
