@@ -6,27 +6,4 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Content Remove="wwwroot\app.js" />
-    <Content Remove="wwwroot\index.html" />
-    <Content Remove="wwwroot\styles.css" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Properties\launchSettings.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Properties\launchSettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\app.js" />
-    <None Include="wwwroot\index.html" />
-    <None Include="wwwroot\styles.css" />
-  </ItemGroup>
-
 </Project>

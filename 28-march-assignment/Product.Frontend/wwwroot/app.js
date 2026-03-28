@@ -1,4 +1,4 @@
-const apiBase = "https://localhost:7192/api/Product";
+const apiBase = window.API_BASE_URL ?? "https://localhost:7192/api/Product";
 
 const productForm = document.getElementById("productForm");
 const productId = document.getElementById("productId");
@@ -22,7 +22,7 @@ async function loadProducts() {
         const products = await response.json();
         renderRows(products);
     } catch {
-        showMessage("Unable to load products.", true);
+        showMessage("Unable to load products. Make sure backend is running and CORS is enabled.", true);
     }
 }
 

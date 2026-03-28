@@ -55,6 +55,13 @@ namespace Product
 
             app.UseAuthorization();
 
+            app.MapGet("/", () => Results.Ok(new
+            {
+                message = "Product API is running",
+                swagger = "/swagger",
+                products = "/api/Product"
+            }));
+
             app.MapControllers();
 
             app.Run();
