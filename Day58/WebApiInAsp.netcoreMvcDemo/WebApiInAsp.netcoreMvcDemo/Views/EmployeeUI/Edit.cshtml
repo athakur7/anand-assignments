@@ -54,6 +54,14 @@
             $("#email").val(emp.email);
             $("#age").val(emp.age);
             $("#empImg").attr("src", emp.imagePath);
+        }).fail(function (xhr) {
+            if (xhr.status === 401) {
+                window.location.href = "/AuthenticationUI/Login";
+            } else if (xhr.status === 403) {
+                alert("You are not allowed to view this employee.");
+            } else {
+                alert("Failed to load employee.");
+            }
         });
 
         $("#editForm").submit(function (e) {
@@ -72,7 +80,14 @@
                     window.location.href = "/EmployeeUI/Index";
                 },
                 error: function (xhr) {
-                    alert("Error: " + xhr.responseText);
+                    if (xhr.status === 403) {
+                        alert("You are not an Admin. You cannot change this.");
+                    } else if (xhr.status === 401) {
+                        alert("Please log in first.");
+                        window.location.href = "/AuthenticationUI/Login";
+                    } else {
+                        alert("Error: " + xhr.responseText);
+                    }
                 }
             });
         });

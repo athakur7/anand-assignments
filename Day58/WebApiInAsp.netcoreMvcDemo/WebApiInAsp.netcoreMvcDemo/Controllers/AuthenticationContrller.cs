@@ -1,4 +1,5 @@
 ﻿namespace WebApiInAsp.netcoreMvcDemo.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,12 +11,12 @@ using WebApiInAsp.netcoreMvcDemo.Models;
 
 [Route("api/[controller]")]
 [ApiController]
+[AllowAnonymous]
 public class AuthenticationController : ControllerBase
 {
     private readonly UserManager<IdentityUser> _userManager;
     private readonly SignInManager<IdentityUser> _signInManager;
     private readonly RoleManager<IdentityRole> _roleManager;
-
     private readonly IConfiguration _configuration;
 
     public AuthenticationController(UserManager<IdentityUser> userManager,
@@ -25,10 +26,8 @@ public class AuthenticationController : ControllerBase
         _userManager = userManager;
         _roleManager = roleManager;
         _signInManager = signInManager;
-
         _configuration = configuration;
     }
-
 
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterUser registerUser, string role)
@@ -45,7 +44,6 @@ public class AuthenticationController : ControllerBase
             Email = registerUser.Email,
             SecurityStamp = Guid.NewGuid().ToString(),
             UserName = registerUser.Username
-
         };
 
         if (await _roleManager.RoleExistsAsync(role))
@@ -61,11 +59,16 @@ public class AuthenticationController : ControllerBase
 
             return StatusCode(StatusCodes.Status200OK,
                 new Response { Status = "Success", Message = "User created SuccessFully" });
-
         }
 
         return StatusCode(StatusCodes.Status500InternalServerError,
-                new Response { Status = "Error", Message = "This Role Doesnot Exist." });
+            new Response { Status = "Error", Message = "This Role Doesnot Exist." });
+    }
+
+    [HttpPost("logout")]
+    public IActionResult Logout()
+    {
+        return Ok(new Response { Status = "Success", Message = "Logged out successfully" });
     }
 
     private JwtSecurityToken GetToken(List<Claim> authClaims)
@@ -78,7 +81,7 @@ public class AuthenticationController : ControllerBase
             expires: DateTime.Now.AddYears(2),
             claims: authClaims,
             signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-            );
+        );
 
         return token;
     }

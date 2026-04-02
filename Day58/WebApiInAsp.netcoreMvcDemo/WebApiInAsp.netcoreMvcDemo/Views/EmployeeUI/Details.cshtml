@@ -21,7 +21,15 @@
             $("#empName").text(emp.firstName + " " + emp.lastName);
             $("#empEmail").text(emp.email);
             $("#empAge").text(emp.age);
-            $("#empImg").attr("src",emp.imagePath);
+            $("#empImg").attr("src", emp.imagePath);
+        }).fail(function (xhr) {
+            if (xhr.status === 401) {
+                window.location.href = "/AuthenticationUI/Login";
+            } else if (xhr.status === 403) {
+                alert("You are not allowed to view this employee.");
+            } else {
+                alert("Failed to load employee details.");
+            }
         });
     });
 </script>

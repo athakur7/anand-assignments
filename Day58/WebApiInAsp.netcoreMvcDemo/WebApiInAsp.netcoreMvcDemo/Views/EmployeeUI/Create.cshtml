@@ -57,7 +57,13 @@
                     window.location.href = "/EmployeeUI/Index";
                 },
                 error: function (xhr) {
-                    alert("Error: " + xhr.responseText);
+                    if (xhr.status === 403) {
+                        alert("You are not an Admin. You cannot create employees.");
+                    } else if (xhr.status === 401) {
+                        window.location.href = "/AuthenticationUI/Login";
+                    } else {
+                        alert("Error: " + xhr.responseText);
+                    }
                 }
             });
         });

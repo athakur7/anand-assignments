@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
 }
 
@@ -38,9 +37,9 @@
 
     function loadEmployees(search = "") {
         $.ajax({
-            url:`/api/Emp/basic?page=${currentPage}&pageSize=${pageSize}&search=${search}`,
+            url: `/api/Emp/basic?page=${currentPage}&pageSize=${pageSize}&search=${encodeURIComponent(search)}`,
             type: "GET",
-            success: function(data) {
+            success: function (data) {
                 let rows = "";
                 if (data.length === 0) {
                     rows = "<tr><td colspan='5' class='text-center'>No records found</td></tr>";
@@ -48,35 +47,38 @@
                 } else {
                     $.each(data, function (i, emp) {
                         rows += `
-                                <tr>
-                                    <td><img src="${emp.imageUrl}" width="50" height="50" /></td>
-                                    <td>${emp.firstName}</td>
-                                    <td>${emp.lastName}</td>
-                                    <td>${emp.email}</td>
-                                    <td>
-                                        <a href="/EmployeeUI/Details?id=${emp.id}" class="btn btn-sm btn-info">Details</a>
-                                        <a href="/EmployeeUI/Edit?id=${emp.id}" class="btn btn-sm btn-warning">Edit</a>
-                                        <a href="/EmployeeUI/Delete?id=${emp.id}" class="btn btn-sm btn-danger">Delete</a>
-                                    </td>
-                                </tr>`;
+                            <tr>
+                                <td><img src="${emp.imageUrl}" width="50" height="50" /></td>
+                                <td>${emp.firstName}</td>
+                                <td>${emp.lastName}</td>
+                                <td>${emp.email}</td>
+                                <td>
+                                    <a href="/EmployeeUI/Details?id=${emp.id}" class="btn btn-sm btn-info">Details</a>
+                                    <a href="/EmployeeUI/Edit?id=${emp.id}" class="btn btn-sm btn-warning">Edit</a>
+                                    <a href="/EmployeeUI/Delete?id=${emp.id}" class="btn btn-sm btn-danger">Delete</a>
+                                </td>
+                            </tr>`;
                     });
-
-                    // Enable/disable Next button depending on result count
                     $("#nextPage").prop("disabled", data.length < pageSize);
                 }
 
                 $("#employeeTableBody").html(rows);
                 $("#currentPageLabel").text("Page " + currentPage);
             },
-            error: function () {
-                alert("Failed to load data.");
+            error: function (xhr) {
+                if (xhr.status === 401) {
+                    window.location.href = "/AuthenticationUI/Login";
+                } else if (xhr.status === 403) {
+                    alert("You are not allowed to view this data.");
+                } else {
+                    alert("Failed to load data.");
+                }
             }
         });
     }
 
     function reload() {
-        const search = $("#searchText").val();
-        loadEmployees(search);
+        loadEmployees($("#searchText").val());
     }
 
     $(document).ready(function () {

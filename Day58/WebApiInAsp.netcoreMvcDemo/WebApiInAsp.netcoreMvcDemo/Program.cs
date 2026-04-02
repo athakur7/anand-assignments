@@ -14,9 +14,7 @@ namespace WebApiInAsp.netcoreMvcDemo
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddHttpContextAccessor();
-
-            builder.Services.AddDbContext<EmpContext>
-                (options => options.UseSqlServer(builder.Configuration.GetConnectionString("constring")));
+            builder.Services.AddDbContext<EmpContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("constring")));
 
             builder.Services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<EmpContext>()
@@ -42,8 +40,8 @@ namespace WebApiInAsp.netcoreMvcDemo
             });
 
             builder.Services.AddScoped<IEmployee, EmployeeService>();
-
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSession();
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(option =>
@@ -91,16 +89,15 @@ namespace WebApiInAsp.netcoreMvcDemo
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=AuthenticationUI}/{action=Login}/{id?}");
 
             app.Run();
         }

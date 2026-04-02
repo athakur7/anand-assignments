@@ -27,6 +27,14 @@
             $("#empName").text(emp.firstName + " " + emp.lastName);
             $("#empEmail").text(emp.email);
             $("#empAge").text("Age: " + emp.age);
+        }).fail(function (xhr) {
+            if (xhr.status === 401) {
+                window.location.href = "/AuthenticationUI/Login";
+            } else if (xhr.status === 403) {
+                alert("You are not allowed to view this employee.");
+            } else {
+                alert("Failed to load employee.");
+            }
         });
 
         $("#btnDelete").click(function () {
@@ -39,7 +47,9 @@
                         window.location.href = "/EmployeeUI/Index";
                     },
                     error: function (xhr) {
-                        alert("Error: " + xhr.responseText);
+                        if (xhr.status === 403) alert("You are not an Admin. You cannot delete this employee.");
+                        else if (xhr.status === 401) window.location.href = "/AuthenticationUI/Login";
+                        else alert("Error: " + (xhr.responseText || xhr.statusText));
                     }
                 });
             }
